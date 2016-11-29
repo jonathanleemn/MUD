@@ -10,4 +10,6 @@ public class Fighter extends Player {
 		setDescription("A strong warrior who lets his strength do the talking");
 	}
 
+
+
 }

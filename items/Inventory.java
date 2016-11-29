@@ -1,18 +1,37 @@
 package items;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Inventory
 {
+	@Override
+	public String toString()
+	{
+		return "Inventory [equippableItems=" + equippableItems + ", itemsEquipped=" + Arrays.toString(itemsEquipped)
+				+ ", consumableItems=" + consumableItems + ", miscItems=" + miscItems + "]";
+	}
+
 	private ArrayList<Equippable> equippableItems;
 	private Equippable[] itemsEquipped;
 	private ArrayList<Consumable> consumableItems;
+	private ArrayList<MiscItem> miscItems;
 	
 	public Inventory()
 	{
 		equippableItems = new ArrayList<Equippable>();
 		itemsEquipped = new Equippable[2];
 		consumableItems = new ArrayList<Consumable>();
+		miscItems = new ArrayList<MiscItem>();
+	}
+	public void addMiscItemToInventory(MiscItem item)
+	{
+		miscItems.add(item);
+	}
+	
+	public MiscItem removeMiscItemFromInventory(int index)
+	{
+		return miscItems.remove(index);		
 	}
 	
 	public void addEquippableToInventory(Equippable item)

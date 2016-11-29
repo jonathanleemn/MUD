@@ -4,6 +4,13 @@ import java.util.Random;
 
 public abstract class Entity
 {
+	@Override
+	public String toString()
+	{
+		return "Entity [name=" + name + ", description=" + description + ", health=" + health + ", hitRating="
+				+ hitRating + ", dodgeChance=" + dodgeChance + ", status=" + status + "]";
+	}
+
 	private String name, description; // age, location may also be possible
 	private int health, hitRating, dodgeChance;
 	private Status status;
