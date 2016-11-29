@@ -1,9 +1,12 @@
 package entities;
 
+import world.Location;
+
 public class Rogue extends Player {
 
-	public Rogue(String name) {
-		super(name);
+	public Rogue(String name, Location loc) 
+	{
+		super(name, loc);
 		setHealth(5);
 		setHitRating(7);
 		setDodgeChance(8);

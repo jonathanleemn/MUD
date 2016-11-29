@@ -2,18 +2,53 @@ package entities;
 
 import java.util.Random;
 
+import world.Location;
+
 public abstract class Entity
 {
+	private String name, description; // age, location may also be possible
+	private int health, hitRating, dodgeChance;
+	private Status status;
+	private Location loc;
+	
 	@Override
 	public String toString()
 	{
 		return "Entity [name=" + name + ", description=" + description + ", health=" + health + ", hitRating="
-				+ hitRating + ", dodgeChance=" + dodgeChance + ", status=" + status + "]";
+				+ hitRating + ", dodgeChance=" + dodgeChance + ", status=" + status + ", loc=" + loc + "]";
 	}
 
-	private String name, description; // age, location may also be possible
-	private int health, hitRating, dodgeChance;
-	private Status status;
+	public Entity()
+	{
+		this.name = getName();
+		this.description = getDescription();
+		this.health = getHealth();
+		this.hitRating = getHitRating();
+		this.dodgeChance = getDodgeChance();
+		this.status = getStatus();
+		this.loc = getLoc();
+	}
+	
+	public Entity(String name, String description, int health, int hitRating, int dodgeChance, Status status, Location loc)
+	{
+		this.name = name;
+		this.description = description;
+		this.health = health;
+		this.hitRating = hitRating;
+		this.dodgeChance = dodgeChance;
+		this.status = status;
+		this.loc = loc;
+	}
+	
+	public Location getLoc()
+	{
+		return loc;
+	}
+	
+	public void setLoc(Location loc)
+	{
+		this.loc = loc;
+	}
 
 	public enum Status
 	{

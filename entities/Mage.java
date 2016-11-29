@@ -1,9 +1,11 @@
 package entities;
 
+import world.Location;
+
 public class Mage extends Player {
 
-	public Mage(String name) {
-		super(name);
+	public Mage(String name, Location loc) {
+		super(name, loc);
 		setHealth(4);
 		setHitRating(9);
 		setDodgeChance(7);

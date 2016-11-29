@@ -6,10 +6,11 @@ import items.Inventory;
 import items.MiscItem;
 import items.Potion;
 import items.Weapon;
+import world.Location;
 
 public class Game
 {
-	Fighter grognak = new Fighter("grognak");
+	Fighter grognak = new Fighter("Grognak", new Location(10,0));
 	Inventory backpack = new Inventory();
 	Potion healthPotion = new Potion("Health Potion", "Restores 10 HP", 10);
 	Weapon ironSword = new Weapon("Iron Sword", "An ordinary blade made of iron", 10);
