@@ -9,4 +9,5 @@ public class Player extends Entity
 		setStatus(Status.ALIVE);
 	}
 
+
 }

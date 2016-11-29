@@ -2,6 +2,12 @@ package items;
 
 public class Weapon extends Item implements Equippable
 {
+	@Override
+	public String toString()
+	{
+		return "Weapon [weaponBonus=" + weaponBonus + "]";
+	}
+
 	private int weaponBonus;
 	
 	public Weapon(String name, String description, int bonus)
