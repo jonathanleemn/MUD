@@ -8,8 +8,14 @@ public class Inventory
 	@Override
 	public String toString()
 	{
-		return "Inventory [equippableItems=" + equippableItems + ", itemsEquipped=" + Arrays.toString(itemsEquipped)
-				+ ", consumableItems=" + consumableItems + ", miscItems=" + miscItems + "]";
+		return "Equippable Items=" + equippableItems + ", Items Equipped=" + Arrays.toString(itemsEquipped)
+				+ ", Consumable Items=" + consumableItems + ", Misc. Items=" + miscItems;
+	}
+	
+	public String getEquipped()
+	{
+		return "Items Equipped=" + Arrays.toString(itemsEquipped);
+		
 	}
 
 	private ArrayList<Equippable> equippableItems;
@@ -20,9 +26,9 @@ public class Inventory
 	public Inventory()
 	{
 		equippableItems = new ArrayList<Equippable>();
+		itemsEquipped = new Equippable[2];
 		consumableItems = new ArrayList<Consumable>();
 		miscItems = new ArrayList<MiscItem>();
-		itemsEquipped = new Equippable[2];
 	}
 	public void addMiscItemToInventory(MiscItem item)
 	{
@@ -51,14 +57,14 @@ public class Inventory
 	
 	public void equipItem(int item)
 	{
-		Equippable toEquip = equippableItems.remove(item);
-		if(toEquip instanceof Armor)
+		Equippable equippableItem = equippableItems.remove(item);
+		if(equippableItem instanceof Armor)
 		{
-			itemsEquipped[0] = toEquip;
+			itemsEquipped[0] = equippableItem;
 		}
-		else if(toEquip instanceof Weapon)
+		else if(equippableItem instanceof Weapon)
 		{
-			itemsEquipped[1] = toEquip;
+			itemsEquipped[1] = equippableItem;
 		}
 	}
 	
@@ -106,29 +112,5 @@ public class Inventory
 		this.itemsEquipped = itemsEquipped;
 	}
 	
-	public int getAttackBonus(){
-		int total = 0;
-		
-		for (int i = 0; i < itemsEquipped.length; i++){
-			try{total += itemsEquipped[i].getAttBonus();
-			} catch (NullPointerException e){
-				total += 0;
-			}
-		}
-		
-		return total;
-	}
-	
-	public int getDefenseBonus(){
-		int total = 0;
-		
-		for (int i = 0; i < itemsEquipped.length; i++){
-			try{total += itemsEquipped[i].getDefBonus();
-			} catch (NullPointerException e){
-				total += 0;
-			}
-		}
-		return total;
-	}
 	
 }

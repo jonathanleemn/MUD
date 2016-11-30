@@ -30,7 +30,8 @@ public abstract class Item
 	@Override
 	public String toString()
 	{
-		return "Item [itemName=" + itemName + ", itemDescription=" + itemDescription + "]";
+		return itemName;
+		//return "Item [itemName=" + itemName + ", itemDescription=" + itemDescription + "]";
 	}
 	
 	

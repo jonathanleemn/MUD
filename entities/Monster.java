@@ -1,5 +1,6 @@
 package entities;
 
-public class Monster extends Entity{
+public class Monster extends Entity
+{
 
 }
