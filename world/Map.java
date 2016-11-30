@@ -1,19 +1,34 @@
 package world;
 
 import java.util.Random;
+import game.*;
 import java.util.Scanner;
+
+import entities.Player;
+import game.Game;
 
 public class Map
 {
-	int[][] map = new int[20][20];
+	int[][] map = new int[10][10];
 	Location loc;
 	Random rand = new Random();
 	Scanner input = new Scanner(System.in);
 	char direction;
+	Player player;
 
-	public Map(int locX, int locY)
+	public Map(Player player)
 	{
-		loc = new Location(locX, locY);
+		this.player = player;
+	}
+	
+	public void resetMap(){
+		for (int row = 0; row < map.length; row++)
+		{
+			for (int col = 0; col < map[row].length; col++)
+			{
+				map[row][col] = 0;
+			}
+		}
 	}
 
 	public void fillMap()
@@ -22,7 +37,8 @@ public class Map
 		{
 			for (int col = 0; col < map[row].length; col++)
 			{
-				map[row][col] = rand.nextInt(9);
+				if (map[row][col] != map[player.loc.getRow()][player.loc.getCol()])
+					map[row][col] = 0;
 			}
 		}
 	}
@@ -32,31 +48,41 @@ public class Map
 		return nextLoc<map.length && nextLoc > 0;
 	}
 
-	public void makeMove(char direction)
+	public void makeMove()
 	{
 		System.out.println("Which direction do you want to move in? (w = north, a = west, s = south, d = east) ");
 		direction = input.next().charAt(0);
+		int tempY = player.loc.getRow();
+		int tempX = player.loc.getCol();
 		
+		try{
 		switch(direction)
 		{
 		case 'w':
 		case 'W':
-			loc.setRow(loc.getRow()-1);
+			player.loc.setRow(player.loc.getRow()-1);
+			
 			break;
 		case 'a':
 		case 'A':
-			loc.setCol(loc.getCol()-1);
+			player.loc.setCol(player.loc.getCol()-1);
 			break;
 		case 's':
 		case 'S':
-			loc.setRow(loc.getRow()+1);
+			player.loc.setRow(player.loc.getRow()+1);
 			break;
 		case 'd':
 		case 'D':
-			loc.setCol(loc.getCol()+1);
+			player.loc.setCol(player.loc.getCol()+1);
 			break;
-		
 		}
+		} catch (ArrayIndexOutOfBoundsException e){
+			player.loc.setRow( tempY);
+			player.loc.setCol(tempX);
+			System.out.println("You've run into a wall, good job.");
+		}
+		
+		fillMap();
 	}
 
 }
