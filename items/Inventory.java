@@ -20,9 +20,9 @@ public class Inventory
 	public Inventory()
 	{
 		equippableItems = new ArrayList<Equippable>();
-		itemsEquipped = new Equippable[2];
 		consumableItems = new ArrayList<Consumable>();
 		miscItems = new ArrayList<MiscItem>();
+		itemsEquipped = new Equippable[2];
 	}
 	public void addMiscItemToInventory(MiscItem item)
 	{
@@ -51,14 +51,14 @@ public class Inventory
 	
 	public void equipItem(int item)
 	{
-		Equippable equippableItem = equippableItems.remove(item);
-		if(equippableItem instanceof Armor)
+		Equippable toEquip = equippableItems.remove(0);
+		if(toEquip instanceof Armor)
 		{
-			itemsEquipped[0] = equippableItem;
+			itemsEquipped[0] = toEquip;
 		}
-		else if(equippableItem instanceof Weapon)
+		else if(toEquip instanceof Weapon)
 		{
-			itemsEquipped[1] = equippableItem;
+			itemsEquipped[1] = toEquip;
 		}
 	}
 	
@@ -104,5 +104,23 @@ public class Inventory
 	public void setItemsEquipped(Equippable[] itemsEquipped)
 	{
 		this.itemsEquipped = itemsEquipped;
+	}
+	
+	public int getAttackBonus(){
+		int total = 0;
+		
+		for (int i = 0; i < itemsEquipped.length; i++){
+			total += itemsEquipped[i].getAttBonus();
+		}
+		return total;
+	}
+	
+	public int getDefenseBonus(){
+		int total = 0;
+		
+		for (int i = 0; i < itemsEquipped.length; i++){
+			total += itemsEquipped[i].getDefBonus();
+		}
+		return total;
 	}
 }
