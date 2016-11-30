@@ -51,7 +51,7 @@ public class Inventory
 	
 	public void equipItem(int item)
 	{
-		Equippable toEquip = equippableItems.remove(0);
+		Equippable toEquip = equippableItems.remove(item);
 		if(toEquip instanceof Armor)
 		{
 			itemsEquipped[0] = toEquip;
@@ -110,8 +110,12 @@ public class Inventory
 		int total = 0;
 		
 		for (int i = 0; i < itemsEquipped.length; i++){
-			total += itemsEquipped[i].getAttBonus();
+			try{total += itemsEquipped[i].getAttBonus();
+			} catch (NullPointerException e){
+				total += 0;
+			}
 		}
+		
 		return total;
 	}
 	
@@ -119,8 +123,12 @@ public class Inventory
 		int total = 0;
 		
 		for (int i = 0; i < itemsEquipped.length; i++){
-			total += itemsEquipped[i].getDefBonus();
+			try{total += itemsEquipped[i].getDefBonus();
+			} catch (NullPointerException e){
+				total += 0;
+			}
 		}
 		return total;
 	}
+	
 }
