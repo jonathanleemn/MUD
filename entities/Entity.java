@@ -2,6 +2,7 @@ package entities;
 
 import java.util.Random;
 
+import items.Inventory;
 import world.Location;
 
 public abstract class Entity
@@ -9,7 +10,8 @@ public abstract class Entity
 	private String name, description; // age, location may also be possible
 	private int health, hitRating, dodgeChance;
 	private Status status;
-	private Location loc;
+	public Location loc;
+	public Inventory backpack = new Inventory();
 	
 	@Override
 	public String toString()
@@ -114,31 +116,13 @@ public abstract class Entity
 	{
 		this.hitRating = hitRating;
 	}
-
-	// attack with ability modifier
-	public int Attack(int enemyDodge, int abilityDamage)
-	{
-		Random rand = new Random();
-
-		int damage = (getHitRating() * (rand.nextInt(2) + 1)) - enemyDodge;
-
-		if (damage > 0)
-			return damage = rand.nextInt(damage) + abilityDamage;
-		else
-			return damage = 0;
+	
+	public int getAttack(){
+		return backpack.getAttackBonus();
 	}
-
-	// attack without ability modifier
-	public int Attack(int enemyDodge)
-	{
-		Random rand = new Random();
-
-		int damage = (rand.nextInt(getHitRating()) + 1) - (rand.nextInt(enemyDodge) + 1);
-
-		if (damage > 0)
-			return damage = rand.nextInt(damage);
-		else
-			return damage = 0;
+	
+	public int getDefense(){
+		return backpack.getDefenseBonus();
 	}
 
 } // End

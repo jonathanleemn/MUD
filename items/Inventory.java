@@ -8,33 +8,42 @@ public class Inventory
 	@Override
 	public String toString()
 	{
-		return "Equippable Items=" + equippableItems + ", Items Equipped=" + Arrays.toString(itemsEquipped)
-				+ ", Consumable Items=" + consumableItems + ", Misc. Items=" + miscItems;
+		return "Inventory [equippableItems=" + equippableItems + ", itemsEquipped=" + Arrays.toString(itemsEquipped)
+				+ ", consumableItems=" + consumableItems + ", miscItems=" + miscItems + "]";
 	}
 	
 	public String getEquipped()
 	{
-		return "Items Equipped=" + Arrays.toString(itemsEquipped);
-		
+		return "itemsEquipped=" + Arrays.toString(itemsEquipped);
 	}
 
-	private ArrayList<Equippable> equippableItems;
+	public ArrayList<Equippable> equippableItems;
 	private Equippable[] itemsEquipped;
 	private ArrayList<Consumable> consumableItems;
-	private ArrayList<MiscItem> miscItems;
+	public ArrayList<MiscItem> miscItems;
 	
 	public Inventory()
 	{
 		equippableItems = new ArrayList<Equippable>();
-		itemsEquipped = new Equippable[2];
 		consumableItems = new ArrayList<Consumable>();
 		miscItems = new ArrayList<MiscItem>();
+		itemsEquipped = new Equippable[2];
 	}
 	public void addMiscItemToInventory(MiscItem item)
 	{
 		miscItems.add(item);
 	}
 	
+	public ArrayList<MiscItem> getMiscItems()
+	{
+		return miscItems;
+	}
+
+	public void setMiscItems(ArrayList<MiscItem> miscItems)
+	{
+		this.miscItems = miscItems;
+	}
+
 	public MiscItem removeMiscItemFromInventory(int index)
 	{
 		return miscItems.remove(index);		
@@ -57,14 +66,14 @@ public class Inventory
 	
 	public void equipItem(int item)
 	{
-		Equippable equippableItem = equippableItems.remove(item);
-		if(equippableItem instanceof Armor)
+		Equippable toEquip = equippableItems.remove(item);
+		if(toEquip instanceof Armor)
 		{
-			itemsEquipped[0] = equippableItem;
+			itemsEquipped[0] = toEquip;
 		}
-		else if(equippableItem instanceof Weapon)
+		else if(toEquip instanceof Weapon)
 		{
-			itemsEquipped[1] = equippableItem;
+			itemsEquipped[1] = toEquip;
 		}
 	}
 	
@@ -112,5 +121,29 @@ public class Inventory
 		this.itemsEquipped = itemsEquipped;
 	}
 	
+	public int getAttackBonus(){
+		int total = 0;
+		
+		for (int i = 0; i < itemsEquipped.length; i++){
+			try{total += itemsEquipped[i].getAttBonus();
+			} catch (NullPointerException e){
+				total += 0;
+			}
+		}
+		
+		return total;
+	}
+	
+	public int getDefenseBonus(){
+		int total = 0;
+		
+		for (int i = 0; i < itemsEquipped.length; i++){
+			try{total += itemsEquipped[i].getDefBonus();
+			} catch (NullPointerException e){
+				total += 0;
+			}
+		}
+		return total;
+	}
 	
 }

@@ -11,7 +11,8 @@ public abstract class NPC extends Entity {
 		setName(getRandomName() + getRandomTitle());
 	}
 	
-	public String getRandomName(){
+	public String getRandomName()
+	{
 		Random rand = new Random();
 		String name = null;
 		
