@@ -37,15 +37,24 @@ public class Map
 		{
 			for (int col = 0; col < map[row].length; col++)
 			{
-				if (map[row][col] != map[player.loc.getRow()][player.loc.getCol()])
-					map[row][col] = 0;
+				map[row][col] = 0;
 			}
 		}
+		map[player.loc.getRow()][player.loc.getCol()] = 1;
 	}
 
 	public boolean isValidMove(int nextLoc)
 	{
 		return nextLoc<map.length && nextLoc > 0;
+	}
+	
+	public void drawMap(){
+		for(int row = 0; row < map.length; row++){
+			for (int col = 0; col < map[row].length; col++){
+				System.out.printf("%d ", map[row][col]);
+			}
+			System.out.println();
+		}
 	}
 
 	public void makeMove()
@@ -61,19 +70,22 @@ public class Map
 		case 'w':
 		case 'W':
 			player.loc.setRow(player.loc.getRow()-1);
-			
+			map[player.loc.getRow()][player.loc.getCol()] = 1;
 			break;
 		case 'a':
 		case 'A':
 			player.loc.setCol(player.loc.getCol()-1);
+			map[player.loc.getRow()][player.loc.getCol()] = 1;
 			break;
 		case 's':
 		case 'S':
 			player.loc.setRow(player.loc.getRow()+1);
+			map[player.loc.getRow()][player.loc.getCol()] = 1;
 			break;
 		case 'd':
 		case 'D':
 			player.loc.setCol(player.loc.getCol()+1);
+			map[player.loc.getRow()][player.loc.getCol()] = 1;
 			break;
 		}
 		} catch (ArrayIndexOutOfBoundsException e){
