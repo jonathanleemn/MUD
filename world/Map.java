@@ -19,6 +19,7 @@ public class Map
 	public Map(Player player)
 	{
 		this.player = player;
+		map[player.loc.getRow()][player.loc.getCol()] = 1;
 	}
 	
 	public void resetMap(){
@@ -59,7 +60,7 @@ public class Map
 
 	public void makeMove()
 	{
-		System.out.print("Which direction do you want to move in? (w = north, a = west, s = south, d = east) ");
+		System.out.println("Which direction do you want to move in? (w = north, a = west, s = south, d = east) ");
 		direction = input.next().charAt(0);
 		int tempY = player.loc.getRow();
 		int tempX = player.loc.getCol();
