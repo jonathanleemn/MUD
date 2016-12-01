@@ -108,6 +108,7 @@ public class Game
 
 	public void displayMap()
 	{
+		System.out.printf("\nYour location is marked with a 1\n");
 		map.drawMap();
 	}
 
@@ -117,7 +118,7 @@ public class Game
 		{
 			player.backpack.removeConsumable(0);
 			int health = player.getHealth() + Constants.HP_POTION;
-			player.setHealth(health);
+			player.addHealth(health);
 			System.out.println("You drink a health potion.");
 		} catch (IndexOutOfBoundsException e)
 		{
